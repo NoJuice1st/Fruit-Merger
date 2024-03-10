@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,8 +17,15 @@ public class Dropper : MonoBehaviour
         var newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         newPos.z = 0;
         newPos.y = fruitSpawnLocation.position.y;
-        dropper.transform.position = newPos;
 
+        //if(newPos.x < Camera.main.ViewportToWorldPoint(Vector3.one).x - gameObject.transform.localScale.x / 2 && newPos.x - gameObject.transform.localScale.x / 2 > Camera.main.ViewportToWorldPoint(Vector3.zero).x) dropper.transform.position = newPos;
+        //if(newPos.x < Camera.main.ViewportToWorldPoint(Vector3.one).x if(1==1)- gameObject.transform.localScale.x / 2;)dropper.transform.position = newPos;
+
+        if(currentFruit)
+        {
+            if(newPos.x < Camera.main.ViewportToWorldPoint(Vector3.one).x - currentFruit.transform.localScale.x / 2 && newPos.x - currentFruit.transform.localScale.x / 2 > Camera.main.ViewportToWorldPoint(Vector3.zero).x) dropper.transform.position = newPos;
+        }
+        else dropper.transform.position = new Vector3(0,fruitSpawnLocation.position.y,0);
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentFruit) DropFruit();
         
     }
