@@ -28,14 +28,14 @@ public class GameManager : MonoBehaviour
 
     public void MergeFruit(GameObject fruitA, GameObject fruitB, GameObject nextFruit)
     {
-        if (collisionDebounce) return;
+        //if (collisionDebounce) return;
         if (!fruitA || !fruitB) return;
-        collisionDebounce = true;
+        //collisionDebounce = true;
 
         collidingObjects.Add(fruitA);
         collidingObjects.Add(fruitB);
 
-        if(collidingObjects.Count == 2)
+        if(collidingObjects.Count >= 4)
         {
             var newFruitPos = collidingObjects[0].transform.position;
             foreach (var item in collidingObjects)
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             }
             collidingObjects.Clear();
             Instantiate(nextFruit, newFruitPos, Quaternion.identity);
-            collisionDebounce = false;
+            //collisionDebounce = false;
         }
     }
 
