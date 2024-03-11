@@ -13,6 +13,10 @@ public class Dropper : MonoBehaviour
     public UnityEvent onDrop;
     public AudioClip dropSound;
 
+    public Transform minMouse;
+    public Transform maxMouse;
+
+
     private void Update()
     {
         var newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -21,7 +25,8 @@ public class Dropper : MonoBehaviour
 
         if(currentFruit)
         {
-            if(newPos.x < Camera.main.ViewportToWorldPoint(Vector3.one).x - currentFruit.transform.localScale.x / 2 && newPos.x - currentFruit.transform.localScale.x / 2 > Camera.main.ViewportToWorldPoint(Vector3.zero).x) dropper.transform.position = newPos;
+            //if(newPos.x < Camera.main.ViewportToWorldPoint(Vector3.one).x - currentFruit.transform.localScale.x / 2 && newPos.x - currentFruit.transform.localScale.x / 2 > Camera.main.ViewportToWorldPoint(Vector3.zero).x) dropper.transform.position = newPos;
+            if(newPos.x < maxMouse.position.x - currentFruit.transform.localScale.x / 2 && newPos.x - currentFruit.transform.localScale.x / 2 > minMouse.position.x) dropper.transform.position = newPos;
         }
         else dropper.transform.position = new Vector3(0, fruitSpawnLocation.position.y, 0);
 
