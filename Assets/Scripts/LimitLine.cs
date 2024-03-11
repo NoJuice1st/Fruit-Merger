@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class LimitLine : MonoBehaviour
 {
+    public UnityEvent onStay;
     private bool isColliding = false;
     [SerializeField]private float collisionTimer = 1f;
 
@@ -24,7 +25,7 @@ public class LimitLine : MonoBehaviour
 
             if(collisionTimer <= 0)
             {
-                print("gameover");
+                onStay.Invoke();
             }
 
         }

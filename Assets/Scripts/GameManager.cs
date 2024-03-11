@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -69,6 +70,9 @@ public class GameManager : MonoBehaviour
             var particlesOfnewFruit = Instantiate(particleSys, newFruitPos, Quaternion.identity);
             var pSys2 = particlesOfnewFruit.GetComponent<ParticleSystem>().main;
             
+            particlesOfOGFruit.transform.localScale = fruitA.transform.localScale / 1.5f ;
+            particlesOfnewFruit.transform.localScale = nextFruit.transform.localScale / 1.5f ;
+
             pSys1.startColor = fruitA.GetComponent<SpriteRenderer>().color + new Color(0,0,0,1);
             pSys2.startColor = nextFruit.GetComponent<SpriteRenderer>().color + new Color(0,0,0,1);
 
@@ -84,6 +88,32 @@ public class GameManager : MonoBehaviour
 
             //collisionDebounce = false;
         }
+    }
+
+    public async void GameOver()
+    {
+        dropper.gameObject.SetActive(false);
+
+        GameObject[] fruits = GameObject.FindGameObjectsWithTag("Fruit");
+
+        foreach (var item in fruits)
+        {
+            if(item)
+            {
+                var particle = Instantiate(particleSys, item.transform.position, Quaternion.identity);
+                var pSys = particle.GetComponent<ParticleSystem>().main;
+
+                particle.transform.localScale = item.transform.localScale / 1.5f ;
+                pSys.startColor = item.GetComponent<SpriteRenderer>().color + new Color(0,0,0,1);
+
+                Destroy(item);
+
+                await new WaitForSeconds(0.2f);
+            }
+        }
+
+        await new WaitForSeconds(1f);
+        SceneManager.LoadScene("SampleScene");
     }
 
 }

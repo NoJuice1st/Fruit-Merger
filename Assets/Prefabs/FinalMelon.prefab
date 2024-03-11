@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1531918682130623614}
   m_Layer: 0
   m_Name: FinalMelon
-  m_TagString: Untagged
+  m_TagString: Fruit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c40339c776e40543a9cc3bb363e5419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextFruit: {fileID: 2062957362480931456, guid: b1a4c1497162b7546a82e1523bc79aa8, type: 3}
+  nextFruit: {fileID: 6180514819164626817, guid: 74f79b8372f1c844d87e427673a888cc, type: 3}
   fruitName: FinalMelon
   gameManager: {fileID: 0}
 --- !u!50 &8460692569479257690
