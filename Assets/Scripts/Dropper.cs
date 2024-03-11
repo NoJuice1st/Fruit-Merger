@@ -11,6 +11,7 @@ public class Dropper : MonoBehaviour
     public GameObject currentFruit;
     public Transform fruitSpawnLocation;
     public UnityEvent onDrop;
+    public AudioClip dropSound;
 
     private void Update()
     {
@@ -41,6 +42,7 @@ public class Dropper : MonoBehaviour
 
     public void DropFruit()
     {
+        AudioSystem.Play(dropSound);
         currentFruit.transform.SetParent(null);
         currentFruit.GetComponent<Rigidbody2D>().isKinematic = false;
         currentFruit = null;

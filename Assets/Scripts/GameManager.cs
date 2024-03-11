@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject particleSys;
     public TMP_Text scoreText;
     public Image image;
+    public AudioClip mergeSound;
 
     public List<GameObject> allFruits;
 
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
 
             Instantiate(nextFruit, newFruitPos, Quaternion.identity);
 
+            AudioSystem.Play(mergeSound);
             
 
             //collisionDebounce = false;
@@ -100,6 +102,7 @@ public class GameManager : MonoBehaviour
         {
             if(item)
             {
+                AudioSystem.Play(mergeSound);
                 var particle = Instantiate(particleSys, item.transform.position, Quaternion.identity);
                 var pSys = particle.GetComponent<ParticleSystem>().main;
 
@@ -112,7 +115,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        await new WaitForSeconds(1f);
+        await new WaitForSeconds(1.5f);
         SceneManager.LoadScene("SampleScene");
     }
 
