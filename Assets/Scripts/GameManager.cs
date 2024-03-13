@@ -38,15 +38,11 @@ public class GameManager : MonoBehaviour
         dropper.AddFruit(nextFruit);
         nextFruit = fruits[Random.Range(0, fruits.Count)];
         image.sprite = nextFruit.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
-        print(nextFruit.name);
-        //dropper.AddFruit(fruits[Random.Range(0, fruits.Count)]);
     }
 
     public void MergeFruit(GameObject fruitA, GameObject fruitB, GameObject nextFruit)
     {
-        //if (collisionDebounce) return;
         if (!fruitA || !fruitB) return;
-        //collisionDebounce = true;
 
         collidingObjects.Add(fruitA);
         collidingObjects.Add(fruitB);
@@ -86,9 +82,6 @@ public class GameManager : MonoBehaviour
             Instantiate(nextFruit, newFruitPos, Quaternion.identity);
 
             AudioSystem.Play(mergeSound);
-            
-
-            //collisionDebounce = false;
         }
     }
 
