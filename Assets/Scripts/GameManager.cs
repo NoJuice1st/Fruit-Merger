@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         dropper.AddFruit(fruits[Random.Range(0, fruits.Count)]);
         nextFruit = fruits[Random.Range(0, fruits.Count)];
         image.sprite = nextFruit.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        image.gameObject.LeanRotateZ(-2, 0.1f).setOnComplete(ResetTweenImage);
     }
 
     public void AddNextFruit()
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         dropper.AddFruit(nextFruit);
         nextFruit = fruits[Random.Range(0, fruits.Count)];
         image.sprite = nextFruit.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+        image.gameObject.LeanRotateZ(-2, 0.1f).setOnComplete(ResetTweenImage);
     }
 
     public void MergeFruit(GameObject fruitA, GameObject fruitB, GameObject nextFruit)
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
             }
             score += i;
             scoreText.text = score.ToString();
+            scoreText.gameObject.LeanScale(new Vector3(1f, 1.1f, 1f), 0.1f).setOnComplete(ResetTweenScore);
             
             var newFruitPos = collidingObjects[0].transform.position;
             
@@ -83,6 +86,16 @@ public class GameManager : MonoBehaviour
 
             AudioSystem.Play(mergeSound);
         }
+    }
+
+    void ResetTweenImage()
+    {
+        image.gameObject.LeanRotateZ(-15, 0.1f).setOvershoot(5f);
+    }
+
+    void ResetTweenScore()
+    {
+        scoreText.gameObject.LeanScale(new Vector3(1f, 1f, 1f), 0.1f);
     }
 
     public async void GameOver()

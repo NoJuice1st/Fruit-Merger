@@ -39,7 +39,7 @@ public class Dropper : MonoBehaviour
         currentFruit = Instantiate(newfruit, gameObject.transform.position, Quaternion.identity);
         Vector3 sizeTo = currentFruit.transform.localScale;
         currentFruit.transform.localScale = Vector3.zero;
-        currentFruit.LeanScale(sizeTo, 0.1f);
+        currentFruit.LeanScale(sizeTo, 0.05f);
 
         currentFruit.transform.SetParent(gameObject.transform);
         currentFruit.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -50,6 +50,7 @@ public class Dropper : MonoBehaviour
         AudioSystem.Play(dropSound);
         currentFruit.transform.SetParent(null);
         currentFruit.GetComponent<Rigidbody2D>().isKinematic = false;
+        currentFruit.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.1f, 0));
         currentFruit = null;
         onDrop.Invoke();
     }
