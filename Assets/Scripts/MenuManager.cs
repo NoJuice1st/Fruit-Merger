@@ -1,15 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class MenuManager : MonoBehaviour
 {
     static MenuManager menuManager;
+    private AudioSource _menuAudio;
 
-    public static bool isMobile;
+    public bool isMobile;
+    public bool isMuted;
 
-    private void Start()
+    private void Awake()
     {
         if (!menuManager)
         {
@@ -22,10 +26,30 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _menuAudio = transform.GetComponent<AudioSource>();
+    }
+
     public void ChangeIsMobile(bool value)
     {
         isMobile = value;
         print(value);
+    }
+    
+    public void ChangeIsMuted(bool value)
+    {
+        _menuAudio = transform.GetComponent<AudioSource>();
+        isMuted = value;
+        
+        if (isMuted)
+        {
+            _menuAudio.enabled = true;
+        }
+        else
+        {
+            _menuAudio.enabled  = false;
+        }
     }
 
     public void PlayButton()

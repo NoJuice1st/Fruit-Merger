@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Dropper : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class Dropper : MonoBehaviour
 
     public void DropFruit()
     {
-        AudioSystem.Play(dropSound);
+        AudioSystem.Play(dropSound, Random.Range(0.7f, 1.2f));
         currentFruit.transform.SetParent(null);
         currentFruit.GetComponent<Rigidbody2D>().isKinematic = false;
         currentFruit.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.1f, 0));

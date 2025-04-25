@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
 
             Instantiate(nextFruit, newFruitPos, Quaternion.identity);
 
-            AudioSystem.Play(mergeSound);
+            AudioSystem.Play(mergeSound, Random.Range(0.7f, 1.2f));
         }
     }
 
@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
         }
 
         await new WaitForSeconds(1.5f);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
